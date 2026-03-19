@@ -1,7 +1,5 @@
 <x-layout>
-    <x-slot:title>
-        Login - Presto
-    </x-slot:title>
+    <x-slot:title>Login — Presto</x-slot:title>
 
     <div class="row justify-content-center mt-5">
         <div class="col-12 col-sm-9 col-md-6 col-lg-5">
@@ -11,14 +9,16 @@
                 <h1 class="auth-title">Bentornato</h1>
                 <p class="auth-subtitle">Effettua il login</p>
 
-                {{-- Credential error --}}
+                {{-- Errore credenziali --}}
                 @if ($errors->any())
                     <div class="alert alert-danger rounded-3 mb-4" role="alert">
                         {{ $errors->first() }}
                     </div>
                 @endif
+
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
+
                     {{-- Email --}}
                     <div class="mb-3">
                         <label for="email" class="presto-label">Email</label>
@@ -35,7 +35,7 @@
                             autocomplete="current-password" placeholder="••••••••">
                     </div>
 
-                    {{-- remember me --}}
+                    {{-- Ricordami --}}
                     <div class="form-check mb-4">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                             {{ old('remember') ? 'checked' : '' }}>
@@ -44,23 +44,19 @@
                         </label>
                     </div>
 
-                    <button type="submit" class="btn-presto w-100">
-                        Accedi
-                    </button>
+                    <button type="submit" class="btn-presto w-100">Accedi</button>
+
                 </form>
 
-                <hr class="my-4" style="border-color: var(--color-sand-200)">
+                <hr class="auth-divider my-4">
 
-                <p class="text-center small mb-0 footer-copy ">
+                <p class="text-center small mb-0">
                     Non hai un account?
-                    <a href="{{ route('register') }}" style="color: var(--color-terra-600); font-weight: 500;">
-                        Registrati
-                    </a>
+                    <a href="{{ route('register') }}" class="auth-link">Registrati</a>
                 </p>
 
             </div>
-
         </div>
     </div>
 
-    </div>
+</x-layout>
