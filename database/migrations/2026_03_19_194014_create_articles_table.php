@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title');
             $table->text('description');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }

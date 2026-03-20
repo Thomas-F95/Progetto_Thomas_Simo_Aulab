@@ -25,8 +25,10 @@ class CategoriesSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach ($this->categories as $name) {
-            Category::create(['name' => $name]);
+        foreach ($this->categories as $category) {
+            Category::create([
+                'name' => $category
+            ]);
         }
     }
 }
