@@ -34,5 +34,3 @@
 
     </x-layout>
 
-
-    <p> Thomas </p>
