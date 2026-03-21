@@ -1,4 +1,6 @@
-<div class="search-wrapper" x-data="{ open: @entangle('results').defer }">
+{{-- <div class="search-wrapper" x-data="{ open: @entangle('results').defer }"> CASO DI UTILIZZO DI ALPINE --}}
+<div class="search-wrapper">
+
     <form wire:submit="search" class="d-flex align-items-center gap-2">
         <div class="search-input-wrapper">
             <input type="text" wire:model.live.debounce.300ms="query" class="search-input" placeholder="Cerca annunci..."
