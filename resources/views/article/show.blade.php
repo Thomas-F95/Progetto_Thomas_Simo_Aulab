@@ -1,62 +1,66 @@
 <x-layout>
+    <x-slot:title>{{ $article->title }} — Presto</x-slot:title>
 
-    <div class="container">
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 col-lg-8">
 
-        <div class="row height justify-content-center align-content-center text-center ">
-            <div class="col-12">
-                <h1 class="display-4">Dettagli dell'ordine</h1>
+            {{-- Breadcrumb --}}
+            <nav class="mb-4">
+                <ol class="breadcrumb-presto">
+                    <li>
+                        <a href="{{ route('article.index') }}" class="auth-link">Annunci</a>
+                    </li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li>
+                        <a href="{{ route('article.byCategory', $article->category) }}" class="auth-link">
+                            {{ $article->category->name }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li class="breadcrumb-current">{{ $article->title }}</li>
+                </ol>
+            </nav>
+
+            {{-- Carosello immagini segnaposto (US2) --}}
+            <div class="article-carousel mb-4">
+                @for ($i = 1; $i <= 3; $i++)
+                    <img src="https://picsum.photos/seed/{{ $article->id }}{{ $i }}/800/400"
+                        alt="Immagine {{ $i }} di {{ $article->title }}"
+                        class="article-carousel-img {{ $i === 1 ? 'active' : '' }}">
+                @endfor
+                <button class="carousel-btn carousel-btn-prev" onclick="changeSlide(-1)">‹</button>
+                <button class="carousel-btn carousel-btn-next" onclick="changeSlide(1)">›</button>
             </div>
-        </div>
 
-        <div class="row height justify-content-center align-content-center text-center ">
-            <div class="col-12">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
+            {{-- Dettaglio --}}
+            <div class="article-show-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <span class="article-card-category">{{ $article->category->name }}</span>
+                        <h1 class="article-show-title">{{ $article->title }}</h1>
                     </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://picsum.photos/seed/{{ $article->id }}/400/180" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://picsum.photos/seed/{{ $article->id }}/400/180" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://picsum.photos/seed/{{ $article->id }}/400/180" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <span class="article-show-price">€ {{ number_format($article->price, 2, ',', '.') }}</span>
                 </div>
-            </div>
-            <div class="col-12 col-md-6 mb-3 height-custom text-center ">
-                <h2 class="display-5"><span class="fw-bold">Titolo:</span>{{ $article->title }}</h2>
-                <div class="d-flex flex-column justify-content-center h-75 ">
-                    <h4 class="fw-bold">Prezzo: {{ $article->price }}</h4>
-                    <h5>Descrizione:</h5>
-                    <p>{{ $articel->description }}</p>
-                </div>
-            </div>
-        </div>
 
+                <hr class="auth-divider my-3">
+
+                <p class="article-show-description">{{ $article->description }}</p>
+
+                <hr class="auth-divider my-3">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="article-show-meta">
+                        Venduto da <strong>{{ $article->user->name }}</strong>
+                    </span>
+                    <span class="article-show-meta">
+                        {{ $article->created_at->diffForHumans() }}
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
     </div>
-
-
-
-
-
 
 </x-layout>

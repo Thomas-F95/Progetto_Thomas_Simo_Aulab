@@ -22,7 +22,7 @@
                 </li>
                 <li class="nav-item">
                     {{-- Attivare quando esiste la rotta article.index (US2) --}}
-                    <a class="nav-link" href="#">Annunci</a>
+                    <a class="nav-link" href="{{ route('article.index') }}">Annunci</a>
                 </li>
             </ul>
 

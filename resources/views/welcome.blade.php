@@ -22,18 +22,29 @@
     </div>
 
     {{-- Ultimi annunci: attivare nella US2 --}}
-    {{--
-    <div class="row justify-content-center mt-5">
+    <div class="row mt-5 mb-3">
+        <div class="col-12">
+            <h2 class="welcome-title h4">Ultimi annunci</h2>
+        </div>
+    </div>
+
+    <div class="row gy-4">
         @forelse ($articles as $article)
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
                 <x-card :article="$article" />
             </div>
         @empty
             <div class="col-12">
-                <h3 class="text-center">Non sono stati creati articoli</h3>
+                <p class="welcome-subtitle">Nessun annuncio ancora pubblicato.</p>
             </div>
         @endforelse
     </div>
-    --}}
+
+    @if ($articles->isNotEmpty())
+        <div class="text-center mt-4">
+            <a href="{{ route('article.index') }}" class="btn-presto-outline">Vedi tutti gli annunci →</a>
+        </div>
+    @endif
+
 
 </x-layout>

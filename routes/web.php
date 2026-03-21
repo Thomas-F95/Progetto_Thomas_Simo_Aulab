@@ -14,6 +14,9 @@ Route::get('/show/article/{article}', [ArticleController::class, 'show'])->name(
 Route::get('/article/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit');
 Route::put('/article/{article}', [ArticleController::class, 'update'])->name('article.update');
 Route::delete('/article/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
+// Articles by category
+Route::get('/articles/category/{category}', [ArticleController::class, 'byCategory'])->name('article.byCategory');
+
 
 // Proctected routes - Auth
 Route::middleware('auth')->group(function () {

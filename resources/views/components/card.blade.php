@@ -10,9 +10,10 @@
 
         <div class="article-card-footer">
             {{-- Attivare quando esiste la rotta article.show (US2) --}}
-            <a href="#" class="article-card-link">Dettaglio →</a>
+            <a href="{{ route('article.show', $article) }}" class="article-card-link">Dettaglio →</a>
             {{-- Attivare quando esiste il filtro categoria (US2) --}}
-            <a href="#" class="article-card-link">{{ $article->category->name }}</a>
+            <a href="{{ route('article.byCategory', $article->category) }}"
+                class="article-card-link">{{ $article->category->name }}</a>
         </div>
     </div>
 
