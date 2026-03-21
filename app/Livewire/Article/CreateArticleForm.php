@@ -9,12 +9,14 @@ use Livewire\Component;
 
 class CreateArticleForm extends Component
 {
+    // Proprietà tipizzate
     public string $title = '';
     public string $description = '';
     public string $price = '';
     public int $category_id = 0;
     public bool $success = false;
 
+    // Regole di validazione in un metodo dedicato
     protected function rules(): array
     {
         return [
@@ -25,6 +27,7 @@ class CreateArticleForm extends Component
         ];
     }
 
+    // Messaggi di errore in italiano
     protected function messages(): array
     {
         return [
@@ -39,6 +42,8 @@ class CreateArticleForm extends Component
         ];
     }
 
+
+    // store() è la convenzione Laravel per salvare una nuova risorsa
     public function store(): void
     {
         $this->validate();
@@ -56,6 +61,7 @@ class CreateArticleForm extends Component
         $this->redirectRoute('article.index');
     }
 
+    // Passa le categorie ordinate alla view
     public function render()
     {
         return view('livewire.article.create-article-form', [
