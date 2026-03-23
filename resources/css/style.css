@@ -186,7 +186,8 @@ body {
     height: 20px;
     background-color: var(--color-sand-200);
 }
-.navbar-presto .navbar-nav.align-items-lg-center li {
+/* Solo i link e bottoni sono cliccabili */
+.navbar-presto .navbar-nav .nav-item {
     display: flex;
     align-items: center;
 }
@@ -507,5 +508,6 @@ body {
     }
     .search-wrapper {
         width: 100%;
+        margin: 8px 0;
     }
 }

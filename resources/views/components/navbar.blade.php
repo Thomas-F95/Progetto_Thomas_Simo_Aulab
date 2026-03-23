@@ -19,18 +19,17 @@
                         href="{{ route('homepage') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    {{-- Attivare quando esiste la rotta article.index (US2) --}}
                     <a class="nav-link" href="{{ route('article.index') }}">Annunci</a>
                 </li>
             </ul>
 
-            {{-- Barra di ricerca --}}
-            <div class="me-auto my-2 my-xl-0">
+            {{-- Barra di ricerca — solo desktop --}}
+            <div class="me-auto my-2 my-xl-0 d-none d-xl-block">
                 @livewire('search-bar')
             </div>
 
             {{-- Destra: @guest / @auth --}}
-            <ul class="navbar-nav ms-3 mb-2 mb-xl-0 align-items-xl-center gap-2">
+            <ul class="navbar-nav ms-auto mb-2 mb-xl-0 align-items-xl-center gap-2">
 
                 @guest
                     <li class="nav-item">
@@ -63,6 +62,12 @@
                 @endauth
 
             </ul>
+
+            {{-- Barra di ricerca — solo mobile, sotto i link --}}
+            <div class="d-xl-none w-100 mt-2 mb-1">
+                @livewire('search-bar')
+            </div>
+
         </div>
 
     </div>
