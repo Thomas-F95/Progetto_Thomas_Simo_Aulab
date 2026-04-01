@@ -8,6 +8,10 @@ use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Jobs\ResizeImage;
+use App\Jobs\GoogleVisionLabelImage;
+use App\Jobs\GoogleVisionSafeSearch;
+
 
 class CreateArticleForm extends Component
 {
@@ -70,10 +74,16 @@ class CreateArticleForm extends Component
         // Salva ogni immagine nello storage e crea il record nel DB
         foreach ($this->images as $image) {
             $path = $image->store('articles', 'public');
-            Image::create([
+            $imageModel = Image::create([
                 'article_id' => $article->id,
                 'path'       => $path,
             ]);
+
+            // Chain dei job: prima resize, poi safe search, poi labels
+            ResizeImage::withChain([
+                new GoogleVisionSafeSearch($imageModel),
+                new GoogleVisionLabelImage($imageModel),
+            ])->dispatch($imageModel);
         }
 
         $this->reset(['title', 'description', 'price', 'category_id', 'images']);
