@@ -25,6 +25,9 @@ class CreateArticleForm extends Component
     // Array di immagini caricate temporaneamente
     public array $images = [];
 
+    // Aggiungi questa per fare da "parcheggio"
+    public $temporary_images = [];
+
     protected function rules(): array
     {
         return [
@@ -51,6 +54,20 @@ class CreateArticleForm extends Component
             'images.*.image'        => 'Il file deve essere un\'immagine.',
             'images.*.max'          => 'Ogni immagine non può superare 2MB.',
         ];
+    }
+
+    // Questa funzione unisce le nuove foto a quelle vecchie
+    public function updatedTemporaryImages()
+    {
+        // Prima validiamo le nuove foto in entrata
+        $this->validate([
+            'temporary_images.*' => 'image|max:2048|mimes:jpeg,png,jpg,webp',
+        ]);
+
+        // Aggiungiamo ogni nuova foto alla nostra lista principale
+        foreach ($this->temporary_images as $image) {
+            $this->images[] = $image;
+        }
     }
 
     // Rimuove una singola immagine dall'array per indice
